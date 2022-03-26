@@ -1,0 +1,12 @@
+venv
+.env
+adventure_game_venv
+sentence_analysis_tool_venv
+rock_paper_scissors_venv
+201_6_API_venv
+file_counter_venv
+api_venv
+__pycache__
+*.json
+*.txt
+*venv*
