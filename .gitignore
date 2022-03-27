@@ -7,6 +7,5 @@ rock_paper_scissors_venv
 file_counter_venv
 api_venv
 __pycache__
-*.json
 *.txt
 *venv*

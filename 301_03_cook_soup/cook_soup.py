@@ -58,9 +58,18 @@ class Soup(Spice):
         ###EXTENDED TASK2:
         # interface with a recipe API instead of concatenating a web search URL. Receive the API response data, format it, and display it as command-line output.
         ###
-        spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
-        response = requests.get(spoonacular_url)
-        data = response.json()
+        # spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
+        # response = requests.get(spoonacular_url)
+        # data = response.json()
+
+        # #dump into json file 'for potato=2, tomato=3'
+        # with open("findByIngredients.json", "w") as file:
+        #     json.dump(data, file)
+
+        #read from json
+        with open("findByIngredients.json", "r") as file:
+            data = json.load(file)
+
         meal_photos = []
         missing_items = []
         missing_count = []
@@ -121,9 +130,18 @@ class Soup(Spice):
       
         #Get source_URLs for each recipe
         for i in range(len(self.recipe_ids)):
-            spoonacular_recipe_url = f"https://api.spoonacular.com/recipes/{self.recipe_ids[i]}/information?apiKey={API_KEY}"
-            response = requests.get(spoonacular_recipe_url)
-            data = response.json()
+            # spoonacular_recipe_url = f"https://api.spoonacular.com/recipes/{self.recipe_ids[i]}/information?apiKey={API_KEY}"
+            # response = requests.get(spoonacular_recipe_url)
+            # data = response.json()
+
+            # #dump into json file 'for potato=2, tomato=3'
+            # with open("recipe_info.json", "w") as file:
+            #     json.dump(data, file)
+
+            #read from json
+            with open("recipe_info.json", "r") as file:
+                data = json.load(file)
+
             recipe_url = data["sourceUrl"]
             self.source_urls.append(recipe_url)
        
@@ -131,7 +149,7 @@ class Soup(Spice):
         backslash_n = '\n'
         return f"\nYour ingredients are {[k for k in self.dictionary.keys()]}.\nAmount is {[v for v in self.dictionary.values()]}.\n\nMy 3 suggestions for recipes are: \n(1){self.meal_titles[0]}***🥄***{self.source_urls[0]}\n**********The required quanty of ingredients you currently have are **********\n**********{[item for item in self.better_ing_list[0]]}\n\{self.missing_ing_lines[0]}\n\n(2){self.meal_titles[1]}***🥄***{self.source_urls[1]}\n**********The required quanty of ingredients you currently have are **********\n**********{[item for item in self.better_ing_list[1]]}\n{self.missing_ing_lines[1]}\n\n(3){self.meal_titles[2]}***🥄***{self.source_urls[2]}\n**********The required quanty of ingredients you currently have are **********\n**********{[item for item in self.better_ing_list[2]]}\n{self.missing_ing_lines[0]}\n\n"
 
-#!!Ai wants to add missing ingredient info under def __str__!!
+
 
 ###TASK3:
 #create child classes to Soup() that have specific qualities.
@@ -141,9 +159,18 @@ class Information(Soup):
     def calory(self):
         #super().cook() # Without inheriting cook method I can't retrieve outputs
 
-        spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
-        response = requests.get(spoonacular_url)
-        data = response.json()
+        # spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
+        # response = requests.get(spoonacular_url)
+        # data = response.json()
+
+        # #dump into json file 'for potato=2, tomato=3'
+        # with open("findByIngredients.json", "w") as file:
+        #     json.dump(data, file)
+
+        #read from json
+        with open("findByIngredients.json", "r") as file:
+            data = json.load(file)
+
         meal_photos = []
 
         for i in range(len(data)):
@@ -162,9 +189,18 @@ class Information(Soup):
                 "protein": "",
             }
         for i in range(len(self.recipe_ids)):
-            spoonacular_nutrition_url = f"https://api.spoonacular.com/recipes/{self.recipe_ids[i]}/nutritionWidget.json?apiKey={API_KEY}"
-            response = requests.get(spoonacular_nutrition_url)
-            data = response.json()
+            # spoonacular_nutrition_url = f"https://api.spoonacular.com/recipes/{self.recipe_ids[i]}/nutritionWidget.json?apiKey={API_KEY}"
+            # response = requests.get(spoonacular_nutrition_url)
+            # data = response.json()
+
+            # #dump into json file 'for potato=2, tomato=3'
+            # with open("nutrition.json", "w") as file:
+            #     json.dump(data, file)
+
+            #read from json
+            with open("nutrition.json", "r") as file:
+                data = json.load(file)
+
             calory_info_dict["calories"] = data["calories"]
             calory_info_dict["fat"] = data["fat"]
             calory_info_dict["protein"] = data["protein"]
@@ -175,9 +211,18 @@ class Information(Soup):
     def gluten(self):
         super().cook()
 
-        spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
-        response = requests.get(spoonacular_url)
-        data = response.json()
+        # spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
+        # response = requests.get(spoonacular_url)
+        # data = response.json()
+
+        # #dump into json file 'for potato=2, tomato=3'
+        # with open("findByIngredients.json", "w") as file:
+        #     json.dump(data, file)
+
+        #read from json
+        with open("findByIngredients.json", "r") as file:
+            data = json.load(file)
+
         meal_photos = []
 
         for i in range(len(data)):
@@ -194,9 +239,18 @@ class Information(Soup):
             "gulten_free": "",
         }
         for i in range(len(self.recipe_ids)):
-            spoonacular_info_url = f"https://api.spoonacular.com/recipes/{self.recipe_ids[i]}/information?apiKey={API_KEY}"
-            response = requests.get(spoonacular_info_url)
-            data = response.json()
+            # spoonacular_info_url = f"https://api.spoonacular.com/recipes/{self.recipe_ids[i]}/information?apiKey={API_KEY}"
+            # response = requests.get(spoonacular_info_url)
+            # data = response.json()
+
+            # #dump into json file 'for potato=2, tomato=3'
+            # with open("recipe_info.json", "w") as file:
+            #     json.dump(data, file)
+
+            #read from json
+            with open("recipe_info.json", "r") as file:
+                data = json.load(file)
+
             gulten_info = data["glutenFree"]
             gulten_dict["gulten_free"] = gulten_info
             self.gultenfree_infos.append(gulten_dict)
@@ -211,9 +265,9 @@ info = Information()
 info.cook()
 print(info)
 
-info.calory() # why print out "missing ingredients" line when cook() is overwritten
-#time.sleep(3)
-info.gluten() # why print out "missing ingredients" line when cook() is overwritten
+# info.calory()
+# #time.sleep(3)
+# info.gluten() 
 
 
 ##Work in Progress, 2 parent classes have no meaning.
