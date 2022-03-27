@@ -39,7 +39,6 @@ class Soup(Spice):
              
         self.amount = input("\nWhat ingredients would you like to use?\nType name=number separated by commas.\ne.g. 'potato=3': ")
         # print(type(self.amount))  --> I thought kwargs will create a dictionary but it is creating a string
-        print("Check the example of input syntax. e.g, potato=3.")
 
         #Create a dictionary of ingredients(keys) and amount(values)
         try:
@@ -157,7 +156,7 @@ class Soup(Spice):
 class Information(Soup):
 
     def calory(self):
-        #super().cook() # Without inheriting cook method I can't retrieve outputs
+        # super().cook() # Without inheriting cook method I can't retrieve outputs
 
         # spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
         # response = requests.get(spoonacular_url)
@@ -209,7 +208,7 @@ class Information(Soup):
         print(f"\n\n{self.meal_titles[0]} info:\n==========Total Calories: {calory_info_list[0]['calories']}==========\n==========Total Fat: {calory_info_list[0]['fat']}==========\n==========Total Protein: {calory_info_list[0]['protein']}==========.\n\n{self.meal_titles[1]} info:\n==========Total Calories: {calory_info_list[1]['calories']}==========\n==========Total Fat: {calory_info_list[1]['fat']}==========\n==========Total Protein: {calory_info_list[1]['protein']}==========.\n\n{self.meal_titles[2]} info:\n==========Total Calories: {calory_info_list[2]['calories']}==========\n==========Total Fat: {calory_info_list[2]['fat']}==========\n==========Total Protein: {calory_info_list[2]['protein']}==========.")
 
     def gluten(self):
-        super().cook()
+        # super().cook()
 
         # spoonacular_url = f"https://api.spoonacular.com/recipes/findByIngredients?apiKey={API_KEY}&ingredients={self.ingredients_list}&number=3"
         # response = requests.get(spoonacular_url)
@@ -265,15 +264,15 @@ info = Information()
 info.cook()
 print(info)
 
-# info.calory()
+info.calory()
 # #time.sleep(3)
-# info.gluten() 
+info.gluten() 
 
 
 ##Work in Progress, 2 parent classes have no meaning.
 #If I dont add (self.name and) self.spice_name - due to MRO, before it gets self.spice_name it goes to API link and erros due to not able to find self.spice_name since it goes to cook() before get the attribute
 #Feel like not fully understood args and kwargs.self.name works without *name.
 
-#if daily 150 points ran out. Try again tomorrow
+#if daily 150 points ran out. Try again tomorrow --> Ai added json dump
 
 
