@@ -18,6 +18,7 @@ class Ingredient():
 
     def get_info(self):
         self.wiki = f"https://en.wikipedia.org/wiki/{self.name}"
+        server_not_available = "https://httpstat.us/503" #Use to test 503 HTTPError
         try:
             response = requests.get(self.wiki)
             #Raising custom exception
