@@ -49,21 +49,37 @@ class PlayGame:
         print("\n")
         print(self.players_cards)
 
-    def tidy_up_cards(self, **kwargs):
-        for v in self.players_cards.values():
-            for card in v:
-                pass
+    def tidy_up_cards(self):
+        for card_set in self.players_cards.values():
+            # print("\nOriginal V")
+            # print(card_set)
+            for item in card_set:
+                card_set.sort()#Sort the list
+                # print(f"Sorted: {card_set}")
+                if card_set.count(item) > 1:
+                    # print(f"\nDuplicate item: {item}")#Duplicate element
+                    dup_item_index = card_set.index(item) # Find the location of the duplicate element
+                    # print(dup_item_index)
+                    card_set.remove(item) #Remove the duplicate element
+                    '''Another half of the duplicate element falls into the location of the original duplicate element already removed.
+                    Then remove it.'''
+                    card_set.pop(dup_item_index) 
+                else:
+                    continue
+                    # print("no, duplicate")
+            # print(f"Final: {card_set}")
+        print(f"\nPlayers' cards without duplicate: {self.players_cards}")   
                 
 
-    def pick_card(self, player_num, *args):
+    def pick_card(self, *args):
         print("\n")
         print("Pick a card from next player.")
+        player_num = int(input("What is your player number?: "))
         # player_num = input("What is your name? e.g. 'player1': ")
         #A player picks one card from next player and remove the card from next player
         self.players_cards[args[player_num]].append(self.players_cards[args[player_num + 1]][0])
         self.players_cards[args[player_num + 1]].remove(self.players_cards[args[player_num + 1]][0])
         print(self.players_cards)
-
 
     def win_lose(self):
         pass

@@ -23,6 +23,8 @@ game.split_cards(num_players)
 
 game.allocate_cards(*player_list)
 
+game.tidy_up_cards()
+
 game.pick_card(0, *player_list)
 
 # print(player_list[0])
