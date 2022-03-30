@@ -9,7 +9,7 @@ player_list = []
 for i in range(0, num_players):
     name = f"player{i}"
     x = Player(name)
-    player_list.append(x)
+    player_list.append((str(x)))
 print(player_list)
 
 # player = Player("Player1")
@@ -21,13 +21,11 @@ game.shuffle_cards()
 
 game.split_cards(num_players)
 
-# players_cards = {}
-# for player in player_list:
-#     for cards in game.final_all_cards:
-#         players_cards[player] = cards
-# print(players_cards)
-
 game.allocate_cards(*player_list)
+
+game.pick_card(0, *player_list)
+
+# print(player_list[0])
 
 
 
