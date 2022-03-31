@@ -1,4 +1,5 @@
 import random
+import sys
 
 class Player:
     def __init__(self, name):
@@ -13,10 +14,11 @@ class PlayGame:
         self.cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K" ]
         self.num_players = num_players
         self.final_all_cards = []
+        self.done_count = 0
 
     def shuffle_cards(self):
         random.shuffle(self.cards)
-        print(self.cards)
+        return self.cards
 
     def split_cards(self, num_players):
         step = 51 // num_players
@@ -40,19 +42,18 @@ class PlayGame:
         self.final_all_cards = []
         for i in range(len(all_cards)):
             self.final_all_cards.append(all_cards[i][0])
-        print(self.final_all_cards)
+        # print(self.final_all_cards)
 
     def allocate_cards(self, *args):
         self.players_cards = {}
         for i in range(len(args)):
             self.players_cards[args[i]] = self.final_all_cards[i]
-        print("\n")
-        print(self.players_cards)
+        return self.players_cards
 
     def tidy_up_cards(self):
         for card_set in self.players_cards.values():
-            # print("\nOriginal V")
-            # print(card_set)
+            if card_set == "done":
+                continue
             for item in card_set:
                 card_set.sort()#Sort the list
                 # print(f"Sorted: {card_set}")
@@ -66,29 +67,58 @@ class PlayGame:
                     card_set.pop(dup_item_index) 
                 else:
                     continue
-                    # print("no, duplicate")
-            # print(f"Final: {card_set}")
-        print(f"\nPlayers' cards without duplicate: {self.players_cards}")   
-                
+        print(f"\nPlayers' cards without duplicate: {self.players_cards}") 
 
-    def pick_card(self, *args):
-        print("\n")
-        print("Pick a card from next player.")
-        player_num = int(input("What is your player number?: "))
-        # player_num = input("What is your name? e.g. 'player1': ")
-        #A player picks one card from next player and remove the card from next player
-        self.players_cards[args[player_num]].append(self.players_cards[args[player_num + 1]][0])
-        self.players_cards[args[player_num + 1]].remove(self.players_cards[args[player_num + 1]][0])
-        print(self.players_cards)
-
-    def win_lose(self):
-        pass
-
+        self.win_lose() 
 
         
-# if __name__ == "__main__":
-#     player_list = Player()
-#     num_player = Player()
+    def pick_card(self, *args):
+        if self.done_count == len(args) - 1:
+            print("\nYou got the Old Queen! You lost.")
+            print("👵GAME OVER👵")
+            sys.exit()
+        print("\n")
+        print("Pick a card from next player.")
+        self.player_num = int(input("What is your player number?: "))
+        
+        #A player picks one card from next player and remove the card from next player
+        if self.players_cards[f"player{self.player_num + 1}"] == "done":
+            next_available_player = [k for k,v in self.players_cards.items() if v != "done" and k != f"player{self.player_num}"]
+            print(f"Available Players: {next_available_player}")
+            index = args.index(next_available_player[0])
+            # print(index)
+            self.players_cards[args[self.player_num]].append(self.players_cards[args[index]][0])
+            self.players_cards[args[index]].remove(self.players_cards[args[index]][0])           
+        else:
+            try:
+                self.players_cards[args[self.player_num]].append(self.players_cards[args[self.player_num + 1]][0])
+                self.players_cards[args[self.player_num + 1]].remove(self.players_cards[args[self.player_num + 1]][0])
+            except IndexError:
+                self.players_cards[args[self.player_num]].append(self.players_cards[args[0]][0])
+                self.players_cards[args[0]].remove(self.players_cards[args[0]][0])
+        
+        # print(f"After player pick a card: {self.players_cards}")
+        print(f"Your current cards: {self.players_cards[args[self.player_num]]}.")
+
+    def show_cards(self):
+        for k,v in self.players_cards.items():
+            if k == self.players_cards[self.player_num]:
+                print(k,v)
+
+
+    def win_lose(self, *args):
+        
+        for name, card_set in self.players_cards.items():
+            if card_set == []:
+                print(f"{name} wins!")
+                self.players_cards[name] = "done"
+                self.done_count += 1
+                print(f"Done_count is {self.done_count}")
+                print(self.players_cards)
+                break
+
+            else:
+                continue
 
 
 
