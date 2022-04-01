@@ -7,3 +7,10 @@ Start by planning this project out using pencil and paper. Scribble ideas in you
 Then start to write your custom classes.
 
 Once you're done, try to build a card game that uses the classes you created. Share the game you built on your forum.
+
+<hr>
+<h1>Old Maid Card Game</h1>
+
+<h4>How To Play: https://bicyclecards.com/how-to-play/old-maid/</h4>
+
+<p>A player who got rid of all the cards is the winner. A player who is left with Queen is the looser.</p>
