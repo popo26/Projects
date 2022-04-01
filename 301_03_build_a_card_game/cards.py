@@ -15,6 +15,7 @@ class PlayGame:
         self.num_players = num_players
         self.final_all_cards = []
         self.done_count = 0
+        self.winner_list = []
 
     def shuffle_cards(self):
         random.shuffle(self.cards)
@@ -80,6 +81,7 @@ class PlayGame:
             for k,v in self.players_cards.items():
                 if v == ['Q']:
                     print(f"\nYou got the Old Queen! {k} lost.")
+                    print(f"Winner is {self.winner_list[0]}🔥")
                     print("👵GAME OVER👵")
                     sys.exit()
         print("\n")
@@ -145,7 +147,7 @@ class PlayGame:
                 self.players_cards[name] = "done"
                 self.done_count += 1
                 # print(f"Done_count is {self.done_count}")
-                # print(self.players_cards)
+                self.winner_list.append(name)
                 break
             else:
                 continue
