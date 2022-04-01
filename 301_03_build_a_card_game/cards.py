@@ -100,7 +100,7 @@ class PlayGame:
             if self.players_cards[args[self.player_num]] == "done":
                 print("You are already out. Sit back and Relax😘")
         except IndexError:
-            print("\nNot valid player number.")
+            print("\n🤨🤨Not valid player number.")
             self.player_num = int(input("What is your player number?: "))
         else:
             if self.players_cards[args[self.player_num]] == "done":
