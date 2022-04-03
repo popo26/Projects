@@ -11,7 +11,10 @@ class Player:
 
 class PlayGame:
     def __init__(self, num_players):
-        self.cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K" ]
+        self.cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", 
+                      "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", 
+                      "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", 
+                      "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K" ]
         self.num_players = num_players
         self.final_all_cards = []
         self.done_count = 0
@@ -19,7 +22,7 @@ class PlayGame:
 
     def shuffle_cards(self):
         random.shuffle(self.cards)
-        return self.cards
+        
 
     def split_cards(self, num_players):
         step = 51 // num_players
@@ -50,7 +53,7 @@ class PlayGame:
         self.players_cards = {}
         for i in range(len(args)):
             self.players_cards[args[i]] = self.final_all_cards[i]
-        return self.players_cards
+        
 
     def tidy_up_cards(self):
         for card_set in self.players_cards.values():
@@ -149,8 +152,7 @@ class PlayGame:
                 # print(f"Done_count is {self.done_count}")
                 self.winner_list.append(name)
                 break
-            else:
-                continue
+           
 
 
 
