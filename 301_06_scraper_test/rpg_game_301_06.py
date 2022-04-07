@@ -21,7 +21,7 @@ while is_game_on:
     if hero_choice == "9":
         break
     elif hero_choice == "1":
-        hero.run_away()
+        print(hero.run_away())
         hero.power()
     elif hero_choice == "0":
         hero.attack()

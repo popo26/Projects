@@ -15,11 +15,11 @@ class Hero():
         
     def run_away(self):
         if self.level == 0:
-            print(f"Hero's level is below {self.level}. GAME OVER")
-            sys.exit()
+            return f"Hero's level is below {self.level}. GAME OVER"
+            # sys.exit()
         else:
             self.level -= 1
-            print(f"\nHero runs away. \nHero's current strengh: {self.strength}\ncurrent level:{self.level}")
+            return f"\nHero runs away. \nHero's current strengh: {self.strength}\ncurrent level:{self.level}"
 
     def power(self):
         power_list = ["food", "sleep", "drink"]

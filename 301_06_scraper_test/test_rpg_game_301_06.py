@@ -21,21 +21,26 @@ class TestRPGGame(TestCase):
         self.assertIn(attack_choice, attack_list)
 
     def test_run_away(self):
-        if self.hero.level == 0:
-            self.assertEqual(objects_301_06.run_away(), "Hero's level is below 0. GAME OVER")
-        if self.hero.level == 2:
-            self.assertEqual(objects_301_06.run_away(), "Hero runs away. \nHero's current strengh: 1\ncurrent level:1")
+        self.hero_p0 = objects_301_06.Hero()
+        self.hero_p0.level = 0
+        self.hero_p2 = objects_301_06.Hero()
+        self.hero_p2.level = 2
+        self.hero_p2.strength = 2
+        if self.hero_p0.level == 0:
+            self.assertEqual(self.hero_p0.run_away(), "Hero's level is below 0. GAME OVER")
+        if self.hero_p2.level == 2 and self.hero_p2.strength == 2:
+            self.assertEqual(self.hero_p2.run_away(), "\nHero runs away. \nHero's current strengh: 2\ncurrent level:1")
        
-    def test_power(self): # not working correctly
-        choice = ["food", "sleep", "drink"]
-        if choice == choice[0]:
-            self.assertEqual(objects_301_06.power(),"Hero gained strength by eating some food.\nStrength: 1\nLevel: 1")
-        if choice == choice[1]:
-            self.assertEqual(objects_301_06.power(), "Hero gained strength and level from sleep.\nStrength: 2\nLevel: 2")
-        if choice == choice[2]:
-            self.assertEqual(objects_301_06.power(), "Hero was thirsty. He had some drink.")
+    # def test_power(self): # Cannot really test since the original code generate random choices
+    #     choice = ["food", "sleep", "drink"]
+    #     if choice == choice[0]:
+    #         self.assertEqual(objects_301_06.power(),"Hero gained strength by eating some food.\nStrength: 1\nLevel: 1")
+    #     if choice == choice[1]:
+    #         self.assertEqual(objects_301_06.power(), "Hero gained strength and level from sleep.\nStrength: 2\nLevel: 2")
+    #     if choice == choice[2]:
+    #         self.assertEqual(objects_301_06.power(), "Hero was thirsty. He had some drink.")
 
-    def test_win_lose(self):
+    def test_win_lose(self): # This bit also include random dice throw so not accurate
         if self.hero.strength == 0 and self.hero.level == 1:
             self.assertEqual(objects_301_06.win_lose(), "Hero strength is below 0.\nHero level is 1. GAME OVER.")
         if self.hero.strength == 1 and self.hero.level == 0:

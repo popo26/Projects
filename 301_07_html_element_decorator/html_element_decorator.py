@@ -4,8 +4,7 @@ def tagify(tag):
     def decorator(function):
         def wrapper(*args):
             function_output = function(*args)
-            print(f"<{tag}>{function_output}</{tag}>")
-            return function(*args)
+            return f"<{tag}>{function_output}</{tag}>"
         return wrapper
     return decorator
 
